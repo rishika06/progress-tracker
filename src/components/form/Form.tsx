@@ -15,6 +15,7 @@ import {
 } from "../../constants/constants";
 import CustomMultiSelect from "../custom-multi-select/customMultiSelect";
 import { useEffect, useState } from "react";
+import { formatDate } from "@/lib/utils";
 
 const options = [
   { label: "React", value: "react" },
@@ -27,7 +28,7 @@ interface IFormData {
   problemCategory: string[];
   difficulty: Difficulty;
   timeTaken: number;
-  date: Date;
+  date: Date | string;
   attemptNo: number;
   result: Result;
   problemPlatform: ProblemPlatform;
@@ -88,21 +89,29 @@ function FromComponent() {
   const [formData, setFormData] = useState<IFormData[]>([]);
 
   const onSubmit = (data: IFormData) => {
-    setFormData((prevData) => [...prevData, data]);
+    const { date, ...restData } = data;
+    const formattedDate = formatDate(date);
+
+    const formattedData = {
+      date: formattedDate,
+      ...restData,
+    };
+
+    setFormData((prevData) => [...prevData, formattedData]);
     // reset();
   };
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
-  // console.log(formData);
+  console.log(formData);
 
   return (
     <div className="">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-12 text-slate-300 text-opacity-90">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-12 text-slate-300 text-opacity-90 mb-6">
           <div className="w-64">
-            <label className="text-sm">Problem Title *</label>
+            <label className="text-xs">Problem Title</label>
             <Input
               {...register("problemTitle")}
               placeholder="Enter Problem Title"
@@ -116,7 +125,7 @@ function FromComponent() {
           </div>
 
           <div className="w-64">
-            <label className="text-sm">Time Taken</label>
+            <label className="text-xs">Time Taken</label>
             <Input
               {...register("timeTaken")}
               placeholder="Time Taken (in mins)"
@@ -130,7 +139,7 @@ function FromComponent() {
           </div>
 
           <div className="flex flex-col mt-1 w-64">
-            <label className="text-sm">Date</label>
+            <label className="text-xs">Date</label>
             <Controller
               name="date"
               control={control}
@@ -146,7 +155,7 @@ function FromComponent() {
           </div>
 
           <div className="w-64">
-            <label className="text-sm">Problem Category</label>
+            <label className="text-xs">Problem Category</label>
             <Controller
               name="problemCategory"
               control={control}
@@ -189,7 +198,7 @@ function FromComponent() {
           </div>
 
           <div className="w-64">
-            <label className="text-sm">Attempt Number</label>
+            <label className="text-xs">Attempt Number</label>
             <Input
               {...register("attemptNo")}
               placeholder="Enter Attempt Number"
@@ -245,7 +254,7 @@ function FromComponent() {
           </div>
 
           <div className="w-64">
-            <label className="text-sm">Problem Link</label>
+            <label className="text-xs">Problem Link</label>
             <Input
               {...register("problemLink")}
               placeholder="Problem Link"
@@ -259,10 +268,14 @@ function FromComponent() {
           </div>
         </div>
 
-        <Button type="submit" className="btn btn-primary">
-          Submit
-        </Button>
+        <div className="flex justify-between items-center pt-4">
+          <Button type="submit" className="btn px-16 py-6 bg-slate-800">
+            Submit
+          </Button>
+          <div className="text-teal-300 text-xs">* All fields are required</div>
+        </div>
       </form>
+      <hr className="border-t-2 border-slate-300 opacity-20 mt-10" />
     </div>
   );
 }

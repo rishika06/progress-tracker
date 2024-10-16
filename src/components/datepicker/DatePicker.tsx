@@ -38,7 +38,7 @@ function DatePicker({
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4 text-gray-400" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {date ? format(date, "dd-MM-yyyy") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-64 p-0 bg-slate-950 text-gray-400 border border-slate-700">

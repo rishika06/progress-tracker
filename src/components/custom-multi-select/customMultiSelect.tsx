@@ -22,7 +22,6 @@ const CustomMultiSelect = ({
   onChange,
 }: CustomMultiSelectProps) => {
   // const [value, setValue] = useState<string[]>([]);
-  console.log(value);
   return (
     <MultiSelector values={value} onValuesChange={onChange} loop={false}>
       <MultiSelectorTrigger>

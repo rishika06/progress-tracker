@@ -1,6 +1,6 @@
 import FromComponent from "./components/form/Form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Table from "./components/table/Table";
+import TableComponent from "./components/table/Table";
 import Graph from "./components/graph/Graph";
 import "./App.css";
 
@@ -25,7 +25,7 @@ function App() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="table">
-          <Table />
+          <TableComponent />
         </TabsContent>
         <TabsContent value="graph">
           <Graph />

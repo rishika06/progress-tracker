@@ -21,7 +21,7 @@ const SelectComp = forwardRef(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={id} className="text-sm">
+          <label htmlFor={id} className="text-xs">
             {label}
           </label>
         )}
