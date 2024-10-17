@@ -12,6 +12,7 @@ import {
   resultOptions,
   ProblemPlatform,
   problemPlatformOptions,
+  problemCategoryOptions,
 } from "../../constants/constants";
 import CustomMultiSelect from "../custom-multi-select/customMultiSelect";
 import { useEffect, useState } from "react";
@@ -163,7 +164,7 @@ function FromComponent() {
                 <CustomMultiSelect
                   value={field.value}
                   onChange={field.onChange}
-                  options={options}
+                  options={problemCategoryOptions}
                   placeholder="Select multiple category"
                 />
               )}
